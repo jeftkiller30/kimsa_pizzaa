@@ -1,0 +1,141 @@
+<ion-content [fullscreen]="true" class="kimsa-home">
+
+  <!-- 🔥 HEADER -->
+  <div class="kimsa-header">
+    <div class="brand-logo">
+      <img src="assets/logo.png" alt="Kimsa" class="logo-img"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
+      <h1 class="logo-text" style="display:none">KiMSA</h1>
+    </div>
+
+ 
+
+      <div class="loc-text">
+        <div class="loc-label">
+          <img src="assets/iconos/local.png" class="mini-img" />
+          <span>Nuestro local</span>
+        </div>
+
+        <a 
+          class="loc-address" 
+          href="https://www.google.com/maps?q=Av.+Mariscal+Caceres+1374"
+          target="_blank">
+          Av. Mariscal Caceres 1374
+        </a>
+      </div>
+    </div>
+  
+
+  <!-- 🔥 CATEGORÍAS -->
+  <div class="categories-scroll">
+    <div class="categories-wrapper">
+      <div class="category-item"
+           *ngFor="let cat of categories"
+           (click)="selectCategory(cat)"
+           [class.active-cat]="cat.active">
+
+        <div class="cat-icon-wrapper" [class.active]="cat.active">
+          <img [src]="cat.icon" [alt]="cat.name" />
+        </div>
+
+        <span class="cat-label">{{ cat.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔥 BANNERS -->
+  <div class="banner-section"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+
+    <div class="banner-viewport">
+      <div class="banner-track"
+           [style.transform]="'translateX(-' + (activeBanner * 100) + '%'">
+
+        <div class="banner-slide"
+             *ngFor="let banner of banners; let i = index">
+
+          <img *ngIf="banner.image"
+               [src]="banner.image"
+               class="banner-img"
+               [alt]="banner.title" />
+
+          <div class="banner-overlay"></div>
+
+          <div class="banner-content">
+            <span class="banner-tag">{{ banner.tag }}</span>
+            <h2 class="banner-title">{{ banner.title }}</h2>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="banner-dots">
+      <span class="dot"
+            *ngFor="let banner of banners; let i = index"
+            [class.active]="i === activeBanner"
+            (click)="goToBanner(i)">
+      </span>
+    </div>
+
+  </div>
+
+  <!-- 🔥 PIZZAS (GRID COMO QUIERES 🍕🍕) -->
+  <div class="product-section">
+
+    <div class="section-header">
+      <h2 class="section-title">Pizzas</h2>
+      <span class="section-link" (click)="goToCategory('pizzas')">Ver todo</span>
+    </div>
+
+    <div class="products-scroll">
+      <div class="product-card"
+           *ngFor="let p of pizzas"
+           (click)="openProduct(p)">
+
+        <div class="product-img-wrapper">
+          <img [src]="p.imagen || 'assets/pizzas/pizzas1.png'" class="product-img" />
+        </div>
+
+        <div class="product-info">
+          <span class="product-name">{{ p.nombre }}</span>
+          <span class="product-desc">{{ p.descripcion }}</span>
+          <span class="product-price">S/ {{ p.precio | number:'1.2-2' }}</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🔥 BEBIDAS (SCROLL HORIZONTAL COMO YA TIENES) -->
+  <div class="product-section">
+
+    <div class="section-header">
+      <h2 class="section-title">Bebidas</h2>
+      <span class="section-link" (click)="goToCategory('bebidas')">Ver todo</span>
+    </div>
+
+    <div class="products-scroll">
+      <div class="product-card"
+           *ngFor="let b of bebidas"
+           (click)="openProduct(b)">
+
+        <div class="product-img-wrapper">
+          <img [src]="b.imagen" class="product-img" />
+        </div>
+
+        <div class="product-info">
+          <span class="product-name">{{ b.nombre }}</span>
+          <span class="product-desc">{{ b.descripcion }}</span>
+          <span class="product-price">S/ {{ b.precio | number:'1.2-2'}}</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

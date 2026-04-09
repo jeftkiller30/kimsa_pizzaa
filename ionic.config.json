@@ -1,0 +1,7 @@
+{
+  "name": "Kimsa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
