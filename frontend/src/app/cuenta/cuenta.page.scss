@@ -1,0 +1,152 @@
+/* 🔥 FONDO GENERAL */
+ion-content {
+  --background: #f6f6f6;
+}
+
+/* 🔥 CENTRADO (AGREGADO) */
+.center-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTENEDOR */
+.login-container {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+/* 🔥 LOGO */
+.logo img {
+  width: 200px;
+  margin: 10px auto 20px;
+}
+
+/* TITULO */
+h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+/* SUBTEXTO */
+p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* GRUPO BOTONES */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 🔥 BOTONES PRO */
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: 100%;
+  padding: 14px;
+
+  border-radius: 14px;
+  border: 2px solid #111;
+  background: #fff;
+
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+/* ICONOS */
+.login-btn ion-icon {
+  font-size: 20px;
+}
+
+/* 🔥 HOVER / TOUCH */
+.login-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* 🔥 EFECTO PREMIUM */
+.login-btn:hover {
+  background: #f1f1f1;
+}
+
+/* 🔥 DIFERENCIAR GOOGLE */
+.login-btn:nth-child(1) {
+  border-color: #4285F4;
+}
+
+/* 🔥 DIFERENCIAR CELULAR */
+.login-btn:nth-child(2) {
+  border-color: #34A853;
+}
+
+/* 🔥 DIFERENCIAR APPLE */
+.login-btn:nth-child(3) {
+  border-color: #000;
+}
+
+/* 🔥 RESPONSIVE EXTRA */
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 400px;
+    margin: auto;
+  }
+}
+
+/* ICONO IMG */
+.icon-img {
+  width: 20px;
+  height: 20px;
+}
+
+/* BOTÓN GOOGLE */
+.login-btn.google {
+  border-color: #000000;
+}
+
+/* FACEBOOK */
+.login-btn.facebook {
+  border-color: #000000;
+}
+
+/* ICONO */
+.icon-facebook {
+  width: 25px;
+  height: 25px;
+}
+
+.guest-text {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* efecto al tocar */
+.guest-text:active {
+  color: #000;
+}
+
+/* efecto hover (web) */
+.guest-text:hover {
+  color: #444;
+}
+
+.login-btn.email {
+  white-space: nowrap;
+}

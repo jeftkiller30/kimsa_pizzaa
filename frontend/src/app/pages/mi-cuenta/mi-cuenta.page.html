@@ -1,0 +1,126 @@
+<ion-content [fullscreen]="true">
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <div class="hero-content">
+      <span class="hola">Hola</span>
+
+<h1>
+  {{ nombreUsuario }}
+</h1>
+    </div>
+
+  </div>
+
+  <!-- MENU -->
+  <div class="menu">
+
+    <!-- 🔥 MI PERFIL (YA FUNCIONA) -->
+    <div class="menu-item" (click)="goPerfil()">
+
+      <div class="icon-box">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
+
+      <div class="menu-text">
+        <h3>Mi Perfil</h3>
+        <p>Edita tu información personal</p>
+      </div>
+
+      <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+
+    </div>
+
+    <!-- SEGURIDAD -->
+    <div class="menu-item" (click)="goSeguridad()">
+
+      <div class="icon-box">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </div>
+
+      <div class="menu-text">
+        <h3>Seguridad</h3>
+        <p>Protege tu cuenta y contraseña</p>
+      </div>
+
+      <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+
+    </div>
+
+    <!-- DIRECCIONES -->
+    <div class="menu-item" (click)="goDirecciones()">
+
+      <div class="icon-box">
+        <ion-icon name="location-outline"></ion-icon>
+      </div>
+
+      <div class="menu-text">
+        <h3>Direcciones</h3>
+        <p>Gestiona tus ubicaciones guardadas</p>
+      </div>
+
+      <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+
+    </div>
+
+    <!-- PAGOS -->
+    <div class="menu-item">
+
+      <div class="icon-box">
+        <ion-icon name="card-outline"></ion-icon>
+      </div>
+
+      <div class="menu-text">
+        <h3>Métodos de pago</h3>
+        <p>Administra tarjetas y pagos</p>
+      </div>
+
+      <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+
+    </div>
+
+  </div>
+
+  <!-- 🔥 BOTTOM MENU -->
+  <div class="bottom-menu">
+
+    <div class="menu-bottom-item"
+         [class.active]="activeTab === 'home'"
+         (click)="setTab('home')">
+
+      <ion-icon [name]="activeTab === 'home' ? 'home' : 'home-outline'"></ion-icon>
+      <span>Inicio</span>
+
+    </div>
+
+    <div class="menu-bottom-item"
+         [class.active]="activeTab === 'cupones'"
+         (click)="setTab('cupones')">
+
+      <ion-icon [name]="activeTab === 'cupones' ? 'pricetag' : 'pricetag-outline'"></ion-icon>
+      <span>Cupones</span>
+
+    </div>
+
+    <div class="menu-bottom-item"
+         [class.active]="activeTab === 'pedidos'"
+         (click)="setTab('pedidos')">
+
+      <ion-icon [name]="activeTab === 'pedidos' ? 'receipt' : 'receipt-outline'"></ion-icon>
+      <span>Mis pedidos</span>
+
+    </div>
+
+    <div class="menu-bottom-item"
+         [class.active]="activeTab === 'cuenta'"
+         (click)="setTab('cuenta')">
+
+      <ion-icon [name]="activeTab === 'cuenta' ? 'person' : 'person-outline'"></ion-icon>
+      <span>Mi cuenta</span>
+
+    </div>
+
+  </div>
+
+</ion-content>

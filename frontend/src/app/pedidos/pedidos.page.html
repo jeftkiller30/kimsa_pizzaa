@@ -1,0 +1,33 @@
+<ion-content>
+
+  <div class="lock-screen" *ngIf="!isLoggedIn">
+
+    <div class="lock-card">
+
+      <!-- 🔒 ICONO -->
+      <ion-icon name="lock-closed-outline" class="lock-icon"></ion-icon>
+
+      <h2>Accede a tu cuenta para disfrutar la experiencia completa</h2>
+
+      <p>
+        Pulsa en login/registro para disfrutar de la experiencia completa y muchos otros beneficios
+      </p>
+
+    </div>
+
+    <!-- BOTONES -->
+    <div class="lock-actions">
+
+      <button class="btn-secondary" (click)="goHome()">
+        Ahora no
+      </button>
+
+      <button class="btn-primary" (click)="goLogin()">
+        Login/Registro
+      </button>
+
+    </div>
+
+  </div>
+
+</ion-content>

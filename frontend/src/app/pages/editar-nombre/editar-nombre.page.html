@@ -1,0 +1,65 @@
+<ion-content [fullscreen]="true" class="edit-name-page">
+
+  <!-- HEADER -->
+  <div class="top-bar">
+
+    <ion-icon
+      name="chevron-back-outline"
+      class="back-icon"
+      (click)="goBack()">
+    </ion-icon>
+
+    <h1>Editar nombre</h1>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <p class="subtitle">
+      Actualiza tu nombre y apellido para que podamos identificarte mejor.
+    </p>
+
+    <!-- CARD -->
+    <div class="form-card">
+
+      <!-- NOMBRE -->
+      <div class="input-group">
+
+        <label>Nombre</label>
+
+        <input
+          type="text"
+          [(ngModel)]="nombre">
+
+      </div>
+
+      <!-- APELLIDO -->
+      <div class="input-group">
+
+        <label>Apellido</label>
+
+        <input
+          type="text"
+          [(ngModel)]="apellido">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="bottom-btn">
+
+    <button
+      [disabled]="!nombre.trim() || !apellido.trim()"
+      (click)="guardar()">
+
+      Guardar cambios
+
+    </button>
+
+  </div>
+
+</ion-content>

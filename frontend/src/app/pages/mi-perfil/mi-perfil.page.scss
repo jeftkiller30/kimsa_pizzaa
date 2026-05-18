@@ -1,0 +1,97 @@
+.perfil-page {
+  --background: #f4f5f8;
+}
+
+/* HEADER */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 24px 14px;
+}
+
+.back-icon {
+  font-size: 30px;
+  color: #111;
+}
+
+.top-bar h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 900;
+  color: #202124;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+/* LISTA */
+.perfil-list {
+  padding: 26px 20px 20px;
+}
+
+/* CARD */
+.perfil-row {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 18px 18px;
+  margin-bottom: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  transition: transform 0.16s ease;
+}
+
+.perfil-row:active {
+  transform: scale(0.98);
+}
+
+/* ICONO */
+.row-icon {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+
+  padding: 12px;
+  border-radius: 18px;
+
+  background: #fff1f1;
+  color: #ef233c;
+  font-size: 24px;
+}
+
+/* TEXTO */
+.row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.row-text h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 850;
+  color: #202124;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+
+.row-text p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #777;
+  line-height: 1.2;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* FLECHA */
+.arrow {
+  font-size: 24px;
+  color: #ef233c;
+  min-width: 24px;
+}

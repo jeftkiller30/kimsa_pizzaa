@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true" class="perfil-page">
+
+  <div class="top-bar">
+    <ion-icon name="chevron-back-outline" class="back-icon" (click)="goBack()"></ion-icon>
+    <h1>Datos Personales</h1>
+  </div>
+
+  <div class="perfil-list">
+
+    <div class="perfil-row" (click)="goEditarNombre()">
+      <ion-icon name="person-outline" class="row-icon"></ion-icon>
+
+      <div class="row-text">
+        <h2>Nombre y apellido</h2>
+        <p>{{ nombreUsuario }}</p>
+      </div>
+
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+
+    <div class="perfil-row" (click)="goEditarTelefono()">
+      <ion-icon name="phone-portrait-outline" class="row-icon"></ion-icon>
+
+      <div class="row-text">
+        <h2>Teléfono</h2>
+       <p>
+  {{ telefonoUsuario || 'Dato no proporcionado' }}
+</p>
+      </div>
+
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+
+    <div class="perfil-row" (click)="goEditarFecha()">
+      <ion-icon name="balloon-outline" class="row-icon"></ion-icon>
+
+      <div class="row-text">
+        <h2>Fecha de nacimiento</h2>
+        <p>{{ fechaNacimiento }}</p>
+      </div>
+
+      <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+    </div>
+
+  </div>
+
+</ion-content>

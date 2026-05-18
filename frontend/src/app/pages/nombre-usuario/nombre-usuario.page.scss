@@ -1,0 +1,128 @@
+ion-content {
+  --background: #f5f5f5;
+}
+
+/* 🔥 LAYOUT GENERAL */
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* 🔝 TOP (pasos) */
+.top {
+  margin-bottom: 10px;
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  position: relative;
+  top: 40px; /* 🔥 baja SOLO esa sección */
+}
+
+.step {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.step.active {
+  background: #ff3b3b;
+  color: white;
+}
+
+.step.inactive {
+  background: #ddd;
+  color: #555;
+}
+
+.steps span {
+  color: #777;
+  font-size: 14px;
+}
+
+/* 🔥 CONTENIDO (ARRIBA, NO CENTRADO) */
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 40px; /* 🔥 separación correcta */
+}
+
+/* 🔤 TEXTOS */
+.title {
+  font-size: 23px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #111;
+
+  white-space: nowrap;     /* 🔥 NO baja de línea */
+  overflow: hidden;        /* 🔥 evita desbordes */
+  text-overflow: ellipsis; /* 🔥 si no cabe, pone ... */
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* 🔥 INPUTS */
+.input-group {
+  margin-bottom: 22px;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #777;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input-group input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  font-size: 16px;
+  background: transparent;
+  outline: none;
+}
+
+/* 🔻 BOTÓN ABAJO */
+.bottom {
+  padding-bottom: 20px;
+}
+
+.bottom button {
+  width: 100%;
+  height: 52px;
+  border-radius: 26px;
+  border: none;
+  background: #ff3b3b;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bottom button:disabled {
+  background: #f1a0a0;
+}
+
+button[disabled] {
+  pointer-events: none;
+}
+
+input {
+  color: #111 !important;
+}

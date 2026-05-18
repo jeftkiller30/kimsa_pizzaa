@@ -1,0 +1,95 @@
+<ion-content [fullscreen]="true" class="address-page">
+
+  <div class="top-bar">
+    <ion-icon name="chevron-back-outline" class="back-icon" (click)="goBack()"></ion-icon>
+    <h1>Direcciones</h1>
+  </div>
+
+  <div class="content">
+
+    <p class="subtitle">
+      Mueve el mapa hasta ubicar tu dirección exacta.
+    </p>
+
+    <div class="map-card">
+      <div id="map" class="map"></div>
+
+      <div class="fixed-pin">
+        <ion-icon name="location-outline"></ion-icon>
+      </div>
+    </div>
+
+    <button class="location-btn" (click)="usarUbicacionActual()">
+      <ion-icon name="navigate-outline"></ion-icon>
+      Usar mi ubicación actual
+    </button>
+
+    <div class="form-card">
+
+      <div class="input-group">
+        <label>Dirección detectada</label>
+
+        <div class="readonly-address">
+          {{ direccion || 'Mueve el mapa o usa tu ubicación actual' }}
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Referencia</label>
+        <input
+          type="text"
+          [(ngModel)]="referencia"
+          placeholder="Ej. Casa azul, segundo piso">
+      </div>
+
+      <div class="type-section">
+
+        <label class="type-label">Guardar como</label>
+
+        <div class="type-options">
+
+          <div
+            class="type-chip"
+            [class.active]="tipoDireccion === 'Casa'"
+            (click)="seleccionarTipo('Casa')">
+            🏠 Casa
+          </div>
+
+          <div
+            class="type-chip"
+            [class.active]="tipoDireccion === 'Trabajo'"
+            (click)="seleccionarTipo('Trabajo')">
+            💼 Trabajo
+          </div>
+
+          <div
+            class="type-chip"
+            [class.active]="tipoDireccion === 'Departamento'"
+            (click)="seleccionarTipo('Departamento')">
+            🏢 Departamento
+          </div>
+
+          <div
+            class="type-chip"
+            [class.active]="tipoDireccion === 'Otro'"
+            (click)="seleccionarTipo('Otro')">
+            📍 Otro
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bottom-btn">
+    <button
+      [disabled]="!latitud || !longitud"
+      (click)="guardar()">
+      Guardar ubicación
+    </button>
+  </div>
+
+</ion-content>

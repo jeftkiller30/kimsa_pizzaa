@@ -1,0 +1,60 @@
+/* CONTENEDOR GENERAL */
+.lock-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+}
+
+/* CENTRO */
+.lock-card {
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+}
+
+/* ICONO 🔥 */
+.lock-icon {
+  font-size: 90px;
+  color: #FFC107;
+  margin-bottom: 20px;
+}
+
+/* TITULO */
+.lock-card h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* TEXTO */
+.lock-card p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* BOTONES ABAJO */
+.lock-actions {
+  display: flex;
+  width: 100%;
+}
+
+/* BOTÓN IZQUIERDA */
+.btn-secondary {
+  flex: 1;
+  padding: 16px;
+  background: #eee;
+  border: none;
+  font-size: 16px;
+}
+
+/* BOTÓN DERECHA */
+.btn-primary {
+  flex: 1;
+  padding: 16px;
+  background: #ff0707;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}

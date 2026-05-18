@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+
+  <div class="center-wrapper">
+
+    <div class="login-container">
+
+      <h2>Crea una cuenta o inicia sesión</h2>
+      <p>Ingresa o crea tu cuenta en simples pasos.</p>
+
+      <div class="btn-group">
+
+        <!-- 🔥 GOOGLE -->
+        <button class="login-btn google" (click)="loginGoogle()">
+          <img src="assets/iconos/google.png" class="icon-img" />
+          Continuar con Google
+        </button>
+
+        <!-- 🔥 FACEBOOK -->
+
+
+<!-- 🔥 EMAIL -->
+<button class="login-btn email" (click)="goEmailAuth()">
+  <ion-icon name="mail-outline"></ion-icon>
+  Continuar con correo electrónico
+</button>
+
+        <!-- 🔥 INVITADO -->
+        <p class="guest-text" (click)="continuarInvitado()">
+          Continuar como invitado
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

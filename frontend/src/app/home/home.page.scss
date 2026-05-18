@@ -1,0 +1,495 @@
+:host {
+  --kimsa-red: #e8212b;
+  --kimsa-dark: #1a1a1a;
+  --kimsa-bg: #f5f5f5;
+  --kimsa-white: #ffffff;
+  --kimsa-gray: #888;
+  --kimsa-light-gray: #f0f0f0;
+  --kimsa-text: #222;
+  --kimsa-price: #e8212b;
+  --kimsa-orange: #f5a623;
+  --card-radius: 16px;
+}
+
+.kimsa-home {
+  --background: var(--kimsa-bg);
+}
+
+/* HEADER */
+.kimsa-header {
+  background: #000;
+  padding: 12px 16px 16px;
+}
+
+.kimsa-header .brand-logo {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 18px;
+}
+
+.kimsa-header .logo-img {
+  height: 40px;
+  object-fit: contain;
+}
+
+.kimsa-header .logo-text {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.kimsa-header .location-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: -10px;
+}
+
+.kimsa-header .loc-icon {
+  font-size: 18px;
+  color: var(--kimsa-gray);
+}
+
+.kimsa-header .loc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kimsa-header .loc-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.kimsa-header .loc-address {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.kimsa-header .mini-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  
+}
+
+.delivery-toggle {
+  display: flex;
+  background: #f1f1f1;
+  border-radius: 25px;
+  margin: 8px 16px;
+  padding: 1.5px;
+  height: 31px; /* 🔥 MÁS DELGADO */
+  margin: 5px 20px 20px;
+
+}
+
+.toggle-option {
+  flex: 1;
+  text-align: center;
+  padding: 6px 0; /* 🔥 MENOS ESPACIO */
+  border-radius: 25px;
+  font-size: 12px; /* 🔥 TEXTO MÁS PEQUEÑO */
+  font-weight: 600;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ACTIVO */
+.toggle-option.active {
+  background: #e8212b;
+  color: #fff;
+}
+
+.toggle-option {
+  color: #555; /* gris */
+}
+
+.toggle-option ion-icon {
+  font-size: 16px;
+}
+
+/* ACTIVO */
+.toggle-option.active {
+  background: #e8212b;
+  color: #fff; /* 🔥 icono y texto blancos */
+}
+
+/* CATEGORÍAS */
+.categories-scroll {
+  background: var(--kimsa-white);
+  padding: 12px 0;
+}
+
+.categories-wrapper {
+  display: flex;
+  overflow-x: auto;
+  padding: 0 16px;
+  gap: 14px;
+  scrollbar-width: none;
+}
+
+.categories-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.category-item:active {
+  transform: scale(0.95);
+}
+
+.cat-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--kimsa-light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cat-icon-wrapper img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.cat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--kimsa-text);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* BANNER */
+.banner-section {
+  margin: 12px 16px;
+  position: relative;
+}
+
+.banner-viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  aspect-ratio: 16 / 9;
+  display: flex;
+}
+
+.banner-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.3s ease-out;
+}
+
+.banner-slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--card-radius);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.65) 100%);
+  border-radius: var(--card-radius);
+}
+
+.banner-content {
+  position: absolute;
+  bottom: 10px;
+  left: 16px;
+}
+
+.banner-tag {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--kimsa-orange);
+  letter-spacing: 2px;
+}
+
+.banner-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.banner-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0 4px;
+}
+
+.banner-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.banner-dots .dot.active {
+  background: var(--kimsa-orange);
+  transform: scale(1.3);
+}
+
+/* PRODUCTOS */
+.product-section {
+  margin: 16px 0 8px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 10px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--kimsa-text);
+}
+
+.section-link {
+  font-size: 13px;
+  color: var(--kimsa-red);
+  font-weight: 600;
+}
+
+/* SCROLL (BEBIDAS) */
+.products-scroll {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 0 16px 12px;
+}
+
+.products-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* GRID (PIZZAS) */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 0 16px 12px;
+}
+
+.products-grid .product-card {
+  min-width: 100%;
+}
+
+/* CARDS */
+.product-card {
+  background: var(--kimsa-white);
+  border-radius: var(--card-radius);
+  min-width: 150px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.product-card:active {
+  transform: scale(0.96);
+}
+
+.product-img-wrapper {
+  height: 120px;
+  background: #f8f8f8;
+}
+
+.products-grid .product-img-wrapper {
+  height: 130px;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.products-grid .product-img {
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--kimsa-text);
+}
+
+.product-desc {
+  font-size: 12px;
+  color: var(--kimsa-gray);
+}
+
+.product-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--kimsa-price);
+  margin-top: 4px;
+}
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #eee;
+  z-index: 999;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #888;
+  transition: 0.2s;
+}
+
+.menu-item ion-icon {
+  font-size: 22px;
+}
+
+.menu-item.active {
+  color: #e8212b;
+}
+
+.menu-item.active ion-icon {
+  color: #e8212b;
+  transform: scale(1.1);
+}
+
+ion-content {
+  --padding-bottom: 80px;
+}
+
+/* 🔒 OVERLAY LOGIN */
+.login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: all; /* 🔥 CLAVE */
+}
+
+.overlay-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+    pointer-events: all; /* 🔥 BLOQUEA CLICS */
+}
+
+.login-modal {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 25px 20px;
+  text-align: center;
+}
+
+.lock-icon {
+  font-size: 70px;
+  color: #ff0707;
+  margin-bottom: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  flex: 1;
+  padding: 14px;
+  background: #eee;
+  border: none;
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 14px;
+  background: #ff3b30;
+  border: none;
+  font-weight: bold;
+}
+
+.login-modal {
+  min-height: 320px;
+}
+
+.modal-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.btn-secondary {
+  color: #999;
+}
+
+.btn-primary {
+  color: #ffffff;
+}
+
+.login-modal h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px 0;
+  color: #111;
+}
+
+.login-modal p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+

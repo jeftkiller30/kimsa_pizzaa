@@ -1,0 +1,112 @@
+<ion-content [fullscreen]="true" class="login-container" (mousedown)="onBackgroundClick($event)">
+
+  <!-- BACK -->
+  <div class="top-bar">
+    <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+  </div>
+
+  <div class="content">
+
+    <h1>Tus datos</h1>
+    <p>Ingresa tus datos para registrarte.</p>
+
+    <!-- EMAIL -->
+    <div class="input-group">
+
+      <label>*E-mail</label>
+      <input
+        type="email"
+        [(ngModel)]="email"
+        (blur)="onEmailBlur($event)">
+
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="input-group">
+      <label>Contraseña</label>
+
+      <div class="password-box">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password"
+          (blur)="onPasswordBlur($event)"
+          (focus)="onPasswordFocus()">
+
+        <button
+          class="eye-btn"
+          type="button"
+          (mousedown)="$event.preventDefault()"
+          (touchstart)="$event.preventDefault()"
+          (touchend)="togglePassword()"
+          (click)="togglePassword()">
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </button>
+      </div>
+
+      <!-- VALIDACIONES -->
+      <div class="rules">
+
+        <div class="rule"
+          [class.valid]="hasLength()"
+          [class.invalid]="passwordBlurred && !hasLength()">
+          <ion-icon *ngIf="hasLength()" name="checkmark-circle"></ion-icon>
+          <ion-icon *ngIf="passwordBlurred && !hasLength()" name="close-circle"></ion-icon>
+          <p>Debe tener entre 8 y 12 caracteres</p>
+        </div>
+
+        <div class="rule"
+          [class.valid]="hasUpperLower()"
+          [class.invalid]="passwordBlurred && !hasUpperLower()">
+          <ion-icon *ngIf="hasUpperLower()" name="checkmark-circle"></ion-icon>
+          <ion-icon *ngIf="passwordBlurred && !hasUpperLower()" name="close-circle"></ion-icon>
+          <p>Debe incluir mayúsculas y minúsculas</p>
+        </div>
+
+        <div class="rule"
+          [class.valid]="hasNumberSpecial()"
+          [class.invalid]="passwordBlurred && !hasNumberSpecial()">
+          <ion-icon *ngIf="hasNumberSpecial()" name="checkmark-circle"></ion-icon>
+          <ion-icon *ngIf="passwordBlurred && !hasNumberSpecial()" name="close-circle"></ion-icon>
+          <p>Debe incluir número y carácter especial</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONFIRM PASSWORD -->
+    <div class="input-group">
+
+      <label>Confirmar contraseña</label>
+
+      <div class="password-box">
+        <input
+          [type]="showConfirm ? 'text' : 'password'"
+          [(ngModel)]="confirmPassword"
+          (blur)="onConfirmBlur($event)">
+
+        <button
+          class="eye-btn"
+          type="button"
+          (mousedown)="$event.preventDefault()"
+          (touchstart)="$event.preventDefault()"
+          (touchend)="toggleConfirm()"
+          (click)="toggleConfirm()">
+          <ion-icon [name]="showConfirm ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="bottom-btn">
+    <button
+      [disabled]="!isValidEmail() || !isValidPassword() || !passwordsMatch()"
+      [class.active]="isValidEmail() && isValidPassword() && passwordsMatch()"
+      (click)="register()">
+      Continuar
+    </button>
+  </div>
+
+</ion-content>

@@ -1,0 +1,62 @@
+<ion-content [fullscreen]="true" class="security-page">
+
+  <div class="top-bar">
+    <ion-icon
+      name="chevron-back-outline"
+      class="back-icon"
+      (click)="goBack()">
+    </ion-icon>
+
+    <h1>Seguridad</h1>
+  </div>
+
+  <div class="content">
+
+    <div class="security-card">
+
+      <div class="security-item">
+        <div class="icon-box">
+          <ion-icon name="mail-outline"></ion-icon>
+        </div>
+
+        <div class="text">
+          <h3>Correo electrónico</h3>
+          <p>{{ email }}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="security-card">
+
+      <div class="security-item danger-light" (click)="cerrarSesion()">
+        <div class="icon-box logout">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </div>
+
+        <div class="text">
+          <h3>Cerrar sesión</h3>
+          <p>Salir de tu cuenta actual</p>
+        </div>
+
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </div>
+
+      <div class="security-item danger" (click)="eliminarCuenta()">
+        <div class="icon-box delete">
+          <ion-icon name="trash-outline"></ion-icon>
+        </div>
+
+        <div class="text">
+          <h3>Eliminar cuenta</h3>
+          <p>Esta acción no se puede deshacer</p>
+        </div>
+
+        <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

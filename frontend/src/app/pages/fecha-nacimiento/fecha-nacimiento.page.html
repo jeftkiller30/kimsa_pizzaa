@@ -1,0 +1,200 @@
+<ion-content [fullscreen]="true">
+
+  <div class="container">
+
+    <!-- BACK -->
+    <div class="top-bar">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps">
+      <div class="step done">✓</div>
+      <div class="step current">2</div>
+      <span>Paso 2 de 2</span>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="content">
+
+      <h1 class="title">Fecha de nacimiento</h1>
+
+      <p class="subtitle">
+        Ingresa tu fecha de nacimiento para verificar tu cuenta.
+      </p>
+
+      <!-- INPUT -->
+      <div class="input-group" [class.input-error]="mostrarErrorEdad">
+
+        <label [class.label-error]="mostrarErrorEdad">
+          Fecha de nacimiento
+        </label>
+
+        <div class="fake-input" (click)="abrirCalendario()">
+
+          {{ getFechaFormateada() }}
+
+          <span class="cal-icon">📅</span>
+
+        </div>
+
+      </div>
+
+      <!-- ERROR EDAD -->
+      <div class="error-edad" *ngIf="mostrarErrorEdad">
+
+        <span class="error-icon">⛔</span>
+
+        <span>No cumples con la edad requerida</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- OVERLAY -->
+  <div
+    class="overlay"
+    *ngIf="mostrarCalendario"
+    (click)="cerrarCalendario()">
+
+    <div
+      class="calendar-box"
+      (click)="$event.stopPropagation()">
+
+      <!-- HEADER FECHA -->
+      <div class="cal-fecha-header">
+
+        <span class="cal-fecha-texto">
+
+          {{ fecha ? fechaHeaderStr : 'Selecciona una fecha' }}
+
+        </span>
+
+      </div>
+
+      <!-- MES Y AÑO -->
+      <div class="cal-header">
+
+        <button
+          class="mes-anio-btn"
+          (click)="toggleSelectorAnio()">
+
+          {{ meses[mesActual] }} {{ anioActual }}
+
+          <span class="flecha">
+
+            {{ mostrarSelectorAnio ? '▴' : '▾' }}
+
+          </span>
+
+        </button>
+
+        <div class="nav-btns" *ngIf="!mostrarSelectorAnio">
+
+          <button
+            class="nav-btn"
+            (click)="mesAnterior()">
+
+            <ion-icon name="chevron-back-outline"></ion-icon>
+
+          </button>
+
+          <button
+            class="nav-btn"
+            (click)="mesSiguiente()">
+
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- SELECTOR DE AÑO -->
+      <div class="anio-selector" *ngIf="mostrarSelectorAnio">
+
+        <div
+          *ngFor="let a of anios"
+          class="anio-item"
+          [class.anio-seleccionado]="a === anioActual"
+          (click)="seleccionarAnio(a)">
+
+          {{ a }}
+
+        </div>
+
+      </div>
+
+      <!-- CALENDARIO -->
+      <div *ngIf="!mostrarSelectorAnio">
+
+        <div class="dias-semana">
+
+          <span *ngFor="let d of diasSemana">
+
+            {{ d }}
+
+          </span>
+
+        </div>
+
+        <div class="dias-grid">
+
+          <div
+            *ngFor="let dia of diasCalendario"
+            class="dia"
+            [class.vacio]="!dia"
+            [class.seleccionado]="esSeleccionado(dia)"
+            [class.hoy]="esHoy(dia)"
+            (click)="seleccionarDia(dia)">
+
+            {{ dia ? dia.getDate() : '' }}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ACCIONES -->
+      <div class="cal-actions">
+
+        <button
+          class="cal-cancel"
+          (click)="cerrarCalendario()">
+
+          Cancelar
+
+        </button>
+
+        <button
+          class="cal-accept"
+          (click)="aceptar()">
+
+          Aceptar
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="bottom-btn">
+
+    <button
+      [disabled]="!fecha || !esMayorDeEdad"
+      (click)="finishRegister()">
+
+      Continuar
+
+    </button>
+
+  </div>
+
+</ion-content>

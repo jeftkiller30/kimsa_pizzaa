@@ -1,0 +1,46 @@
+<ion-content [fullscreen]="true" class="login-container">
+
+  <!-- 🔙 BACK -->
+  <div class="top-bar">
+    <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+  </div>
+
+  <div class="content">
+
+    <h1>¡Qué alegría verte de nuevo por aquí!</h1>
+    <p>Ingresa tus datos y disfruta de beneficios infinitos</p>
+
+    <!-- EMAIL -->
+    <div class="input-group">
+      <label>*E-mail</label>
+      <input
+        type="email"
+        [(ngModel)]="email">
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="input-group">
+      <label>Contraseña</label>
+
+      <div class="password-box">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          [(ngModel)]="password">
+
+        <ion-icon
+          name="eye-outline"
+          (click)="togglePassword()">
+        </ion-icon>
+      </div>
+    </div>
+
+    <p class="forgot">¿Has olvidado la contraseña?</p>
+
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="bottom-btn">
+    <button (click)="login()">Continuar</button>
+  </div>
+
+</ion-content>

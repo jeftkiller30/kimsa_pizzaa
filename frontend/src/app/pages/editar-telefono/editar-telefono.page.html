@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true" class="edit-phone-page">
+
+  <!-- HEADER -->
+  <div class="top-bar">
+
+    <ion-icon
+      name="chevron-back-outline"
+      class="back-icon"
+      (click)="goBack()">
+    </ion-icon>
+
+    <h1>Editar teléfono</h1>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <p class="subtitle">
+      Agrega tu número para facilitar tus pedidos y entregas.
+    </p>
+
+    <!-- CARD -->
+    <div class="form-card">
+
+      <div class="input-group">
+
+        <label>Número telefónico</label>
+
+<input
+  type="text"
+  maxlength="9"
+  [value]="telefono"
+  (input)="soloNumeros($event)">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BOTÓN -->
+  <div class="bottom-btn">
+
+    <button
+      [disabled]="!telefono.trim()"
+      (click)="guardar()">
+
+      Guardar cambios
+
+    </button>
+
+  </div>
+
+</ion-content>

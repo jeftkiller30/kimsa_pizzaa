@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-container">
+
+  <div class="content">
+
+    <div class="icon-box">
+      <ion-icon name="key-outline"></ion-icon>
+    </div>
+
+    <h2>
+      ¿Ya tienes cuenta? Ingresa con tu correo.
+      ¿Nuevo aquí? Regístrate ahora.
+    </h2>
+
+    <button class="btn primary" (click)="goLogin()">
+      Ingresar
+    </button>
+
+    <button class="btn secondary" (click)="goRegister()">
+      Registrarme
+    </button>
+
+  </div>
+
+</ion-content>
