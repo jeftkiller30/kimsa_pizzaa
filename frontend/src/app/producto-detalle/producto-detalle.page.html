@@ -1,0 +1,140 @@
+<ion-content
+  [fullscreen]="true"
+  [scrollY]="false"
+  class="detalle-page">
+
+  <!-- 🔥 IMAGEN -->
+  <div
+  class="hero-img"
+  [class.drink-image]="
+    producto.categoria === 'bebidas' ||
+    producto.categoria === 'cervezas'
+  ">
+
+    <img [src]="producto.imagen" />
+
+    <button class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+
+  </div>
+
+  <!-- 🔥 INFO -->
+  <div class="info-card">
+
+    <!-- 🔥 TITULO -->
+    <div class="title-row">
+
+      <h1>
+        {{ producto.nombre }}
+      </h1>
+
+      <span>
+        S/ {{ producto.precio | number:'1.2-2' }}
+      </span>
+
+    </div>
+
+    <!-- 🔥 DESCRIPCIÓN -->
+    <p class="description">
+      {{ producto.descripcion }}
+    </p>
+
+    <!-- 🔥 BENEFICIOS -->
+    <div class="features">
+
+      <div>
+        🔥
+        <strong>Recién hecha</strong>
+        <small>Caliente y deliciosa</small>
+      </div>
+
+      <div>
+        🛵
+        <strong>Entrega rápida</strong>
+        <small>30-45 min</small>
+      </div>
+
+      <div>
+        🥬
+        <strong>Ingredientes</strong>
+        <small>frescos</small>
+      </div>
+
+    </div>
+
+    <!-- 🔥 CANTIDAD -->
+    <h3 class="cantidad-title">
+      Cantidad
+    </h3>
+
+    <div class="quantity-row">
+
+      <div class="quantity-box">
+
+        <button (click)="disminuir()">
+          <ion-icon name="remove-outline"></ion-icon>
+        </button>
+
+        <span class="cantidad-number">
+          {{ cantidad }}
+        </span>
+
+        <button (click)="aumentar()">
+          <ion-icon name="add-outline"></ion-icon>
+        </button>
+
+      </div>
+
+      <!-- 🔥 CARRITO -->
+      <div class="cart-info">
+
+        <ion-icon name="cart-outline"></ion-icon>
+
+        En tu carrito
+
+        <b>{{ cantidadEnCarrito }}</b>
+
+      </div>
+
+    </div>
+
+    <!-- 🔥 PRECIOS -->
+    <div class="price-box">
+
+      <div>
+        <small>Precio unitario</small>
+
+        <strong>
+          S/ {{ producto.precio | number:'1.2-2' }}
+        </strong>
+      </div>
+
+      <div class="divider"></div>
+
+      <div>
+        <small>Total</small>
+
+        <strong class="total">
+          S/ {{ total | number:'1.2-2' }}
+        </strong>
+      </div>
+
+    </div>
+
+    <!-- 🔥 BOTÓN -->
+    <button
+      class="add-cart-btn"
+      (click)="agregarCarrito()">
+
+      <ion-icon name="cart-outline"></ion-icon>
+
+      Añadir al carrito
+
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+
+    </button>
+
+  </div>
+
+</ion-content>

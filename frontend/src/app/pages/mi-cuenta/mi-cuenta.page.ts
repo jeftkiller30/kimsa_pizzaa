@@ -16,11 +16,10 @@ import {
 
   home,
   homeOutline,
-  pricetag,
-  pricetagOutline,
   receipt,
   receiptOutline,
-  person
+  person,
+  cartOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -35,6 +34,7 @@ export class MiCuentaPage {
   activeTab: string = 'cuenta';
 
   nombreUsuario: string = '';
+  cantidadTotal = 0;
 
   constructor(private router: Router) {
 
@@ -47,11 +47,10 @@ export class MiCuentaPage {
 
       home,
       homeOutline,
-      pricetag,
-      pricetagOutline,
       receipt,
       receiptOutline,
-      person
+      person,
+      cartOutline
     });
 
   }
@@ -60,9 +59,18 @@ export class MiCuentaPage {
 
     this.activeTab = 'cuenta';
 
+    const carrito =
+  JSON.parse(localStorage.getItem('carrito') || '[]');
+
+this.cantidadTotal =
+  carrito.reduce(
+    (total: number, item: any) =>
+      total + item.cantidad,
+    0
+  );
+
     const user = getAuth().currentUser;
 
-    // 🔥 LEER NOMBRE POR UID
     if (user) {
 
       const nombreGuardado =
@@ -87,19 +95,25 @@ export class MiCuentaPage {
 
       case 'home':
 
+        this.activeTab = 'home';
+
         this.router.navigate(['/home']);
 
         break;
 
-      case 'cupones':
+      case 'carrito':
 
-        console.log('Cupones');
+  this.activeTab = 'carrito';
 
-        break;
+  this.router.navigate(['/carrito']);
+
+  break;
 
       case 'pedidos':
 
-        console.log('Pedidos');
+        this.activeTab = 'pedidos';
+
+        this.router.navigate(['/mis-pedidos']);
 
         break;
 

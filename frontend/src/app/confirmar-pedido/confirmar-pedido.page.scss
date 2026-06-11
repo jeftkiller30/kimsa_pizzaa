@@ -1,0 +1,417 @@
+.confirm-page {
+  --background: #f6f6f6;
+}
+
+.header {
+  height: 100px;
+  background: #ffffff;
+  padding: 44px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 900;
+  color: #111;
+}
+
+.back-btn {
+  position: absolute;
+  left: 22px;
+  top: 48px;
+  border: none;
+  background: transparent;
+}
+
+.back-btn ion-icon {
+  font-size: 30px;
+  color: #111;
+}
+
+.content {
+  padding: 16px 16px 28px;
+}
+
+/* INFO CARD */
+.info-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-card-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+  background: #fff0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-box ion-icon {
+  color: #f20d17;
+  font-size: 26px;
+}
+
+.info-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.info-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.info-title-row h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 900;
+  color: #111;
+}
+
+.info-body p {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #222;
+  line-height: 1.25;
+}
+
+.info-body small {
+  color: #666;
+  font-size: 14px;
+  display: block;
+}
+
+.change-btn {
+  border: none;
+  background: transparent;
+  color: #f20d17;
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.time-box {
+  background: #fff0f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #f20d17;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* PRODUCTS */
+.products-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.products-header div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.products-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 900;
+  color: #111;
+}
+
+.products-header ion-icon {
+  font-size: 24px;
+  color: #f20d17;
+}
+
+.products-header button {
+  border: none;
+  background: transparent;
+  color: #f20d17;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.product-row:last-child {
+  border-bottom: none;
+}
+
+.product-row img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.product-info h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 900;
+  color: #111;
+}
+
+.product-info p {
+  margin: 0 0 5px;
+  color: #666;
+  font-size: 14px;
+}
+
+.product-info small {
+  color: #777;
+  font-size: 13px;
+}
+
+.product-row strong {
+  font-size: 15px;
+  color: #111;
+}
+
+/* NOTE */
+.note-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.note-card ion-icon {
+  color: #f20d17;
+  font-size: 24px;
+}
+
+.note-card h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 900;
+  color: #111;
+}
+
+.note-card p {
+  margin: 0;
+  color: #222;
+  font-size: 14px;
+}
+
+.note-card button {
+  border: none;
+  background: transparent;
+  color: #f20d17;
+  font-size: 14px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* SUMMARY */
+.summary-card {
+  background: #fff7e8;
+  border: 1px solid #ffe0a8;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.summary-card div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.summary-card hr {
+  border: none;
+  border-top: 1px dashed #d8d8d8;
+  margin: 12px 0;
+}
+
+.total-row {
+  margin-bottom: 0 !important;
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.total-row strong {
+  color: #f20d17;
+  font-size: 26px;
+}
+
+/* BOTÓN */
+.confirm-btn {
+  width: 100%;
+  height: 62px;
+  border: none;
+  border-radius: 16px;
+  background: #f20d17;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.confirm-btn ion-icon {
+  font-size: 26px;
+}
+
+.secure {
+  margin-top: 16px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.secure ion-icon {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.nota-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+}
+
+.nota-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.nota-sheet {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  background: #ffffff;
+  border-radius: 24px 24px 0 0;
+
+  padding: 22px;
+}
+
+.nota-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nota-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #111;
+}
+
+.nota-header button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f3f3f3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nota-sheet textarea {
+  width: 100%;
+  height: 120px;
+
+  margin-top: 18px;
+  padding: 14px;
+
+  border-radius: 16px;
+  border: 1px solid #eeeeee;
+
+  font-size: 15px;
+  color: #111;
+
+  resize: none;
+  outline: none;
+}
+
+.nota-count {
+  text-align: right;
+  margin-top: 8px;
+
+  font-size: 12px;
+  color: #888;
+}
+
+.save-note-btn {
+  width: 100%;
+  height: 54px;
+
+  margin-top: 16px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #f20d17;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.drink-img {
+  object-fit: contain !important;
+  background: #fff;
+  padding: 4px;
+}

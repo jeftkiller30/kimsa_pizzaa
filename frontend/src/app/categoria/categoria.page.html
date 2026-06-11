@@ -24,9 +24,10 @@
   </div>
 
   <div class="tabs-scroll">
-    <div class="tabs-wrapper">
+    <div class="tabs-wrapper" #tabsWrapper>
       <div class="tab-item"
-           *ngFor="let cat of categories"
+     #tabItem
+     *ngFor="let cat of categories"
            [class.active]="cat.active"
            (click)="selectCategory(cat)">
         <div class="tab-icon-wrapper">

@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/jeftkiller30/kimsa-sistema#readme",
   "dependencies": {
+    "@capacitor-community/facebook-login": "^8.0.0",
+    "@mercadopago/sdk-js": "^0.0.3",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "leaflet": "^1.9.4",

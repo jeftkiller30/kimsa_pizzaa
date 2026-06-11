@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   FacebookAuthProvider,
   signInWithPopup,
+  signInWithCredential,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut
@@ -35,12 +36,28 @@ export class AuthService {
   // 🔥 FACEBOOK
   async loginFacebook() {
 
-    const provider =
-      new FacebookAuthProvider();
+    const { FacebookLogin } =
+      await import('@capacitor-community/facebook-login');
 
-    return await signInWithPopup(
+    await FacebookLogin.initialize({
+      appId: '2240004110138526'
+    });
+
+    const result = await FacebookLogin.login({
+      permissions: ['public_profile']
+    });
+
+    if (!result.accessToken) {
+      throw new Error('No se obtuvo token de Facebook');
+    }
+
+    const credential = FacebookAuthProvider.credential(
+      result.accessToken.token
+    );
+
+    return await signInWithCredential(
       this.auth,
-      provider
+      credential
     );
 
   }

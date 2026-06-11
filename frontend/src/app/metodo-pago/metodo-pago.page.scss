@@ -1,0 +1,276 @@
+.pago-page {
+  --background: #ffffff;
+}
+
+.header {
+  height: 92px;
+  padding: 42px 20px 0;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #111;
+}
+
+.back-btn {
+  position: absolute;
+  left: 18px;
+  top: 45px;
+
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.back-btn ion-icon {
+  font-size: 28px;
+  color: #111;
+}
+
+.content {
+  padding: 14px 14px 26px;
+}
+
+.summary-card {
+  background: #fff7e8;
+  border: 1px solid #ffe0a8;
+  border-radius: 14px;
+
+  padding: 16px 18px;
+
+  margin-bottom: 22px;
+}
+
+.summary-card h2 {
+  margin: 0 0 14px;
+
+  font-size: 15px;
+  font-weight: 900;
+  color: #111;
+}
+
+.summary-card div {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+
+  color: #111;
+  font-size: 14px;
+}
+
+.summary-card hr {
+  border: none;
+  border-top: 1px dashed #d8d8d8;
+
+  margin: 10px 0 12px;
+}
+
+.total-row {
+  margin-bottom: 0 !important;
+
+  font-size: 18px !important;
+  font-weight: 900;
+}
+
+.total-row strong {
+  color: #f20d17;
+  font-size: 22px;
+}
+
+.section-title {
+  margin: 0 0 12px;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  color: #111;
+}
+
+.payment-card {
+  height: 78px;
+
+  border: 1px solid #eeeeee;
+  border-radius: 14px;
+
+  padding: 12px 14px;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: #ffffff;
+
+  transition: 0.25s;
+}
+
+.payment-card img {
+  width: 42px;
+  height: 42px;
+
+  object-fit: contain;
+}
+
+.payment-info {
+  flex: 1;
+}
+
+.payment-info h4 {
+  margin: 0 0 4px;
+
+  font-size: 15px;
+  font-weight: 900;
+
+  color: #111;
+}
+
+.payment-info p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: #666;
+}
+
+.radio {
+  width: 24px;
+  height: 24px;
+
+  border-radius: 50%;
+  border: 2px solid #cfcfcf;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.25s;
+}
+
+.radio span {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* ACTIVO GENERAL */
+.payment-card.active {
+  border-width: 2px;
+}
+
+.payment-card.active {
+  border-width: 2px;
+}
+
+.yape-card.active {
+  border-color: #8d2ee6;
+  background: #fffaff;
+}
+
+.yape-card.active .radio {
+  border-color: #8d2ee6;
+  background: #8d2ee6;
+}
+
+.plin-card.active {
+  border-color: #10c7c9;
+  background: #f0ffff;
+}
+
+.plin-card.active .radio {
+  border-color: #10c7c9;
+  background: #10c7c9;
+}
+
+.tarjeta-card.active {
+  border-color: #1e7bff;
+  background: #f2f7ff;
+}
+
+.tarjeta-card.active .radio {
+  border-color: #1e7bff;
+  background: #1e7bff;
+}
+
+.efectivo-card.active {
+  border-color: #22b14c;
+  background: #f2fff6;
+}
+
+.efectivo-card.active .radio {
+  border-color: #22b14c;
+  background: #22b14c;
+}
+
+.secure-card {
+  background: #eefbea;
+  border-radius: 12px;
+
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-top: 18px;
+}
+
+.secure-card ion-icon {
+  font-size: 28px;
+  color: #2dbb45;
+}
+
+.secure-card h4 {
+  margin: 0 0 4px;
+
+  font-size: 13px;
+  font-weight: 900;
+
+  color: #111;
+}
+
+.secure-card p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.4;
+
+  color: #555;
+}
+
+.continue-btn {
+  width: 100%;
+  height: 58px;
+
+  margin-top: 18px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #ff2b12;
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.continue-btn ion-icon {
+  font-size: 24px;
+}

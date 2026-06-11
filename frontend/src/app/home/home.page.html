@@ -155,6 +155,90 @@
       </div>
     </div>
 
+    <div class="product-section">
+
+  <div class="section-header">
+    <h2 class="section-title">Alitas</h2>
+
+    <span class="section-link"
+          (click)="goToCategory('alitas')">
+      Ver todo
+    </span>
+  </div>
+
+  <div class="products-scroll">
+
+    <div class="product-card"
+         *ngFor="let a of alitas"
+         (click)="openProduct(a)">
+
+      <div class="product-img-wrapper">
+        <img [src]="a.imagen"
+             class="product-img" />
+      </div>
+
+      <div class="product-info">
+        <span class="product-name">
+          {{ a.nombre }}
+        </span>
+
+        <span class="product-desc">
+          {{ a.descripcion }}
+        </span>
+
+        <span class="product-price">
+          S/ {{ a.precio | number:'1.2-2'}}
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="product-section">
+
+  <div class="section-header">
+    <h2 class="section-title">Piqueos</h2>
+
+    <span class="section-link"
+          (click)="goToCategory('piqueos')">
+      Ver todo
+    </span>
+  </div>
+
+  <div class="products-scroll">
+
+    <div class="product-card"
+         *ngFor="let p of piqueos"
+         (click)="openProduct(p)">
+
+      <div class="product-img-wrapper">
+        <img [src]="p.imagen"
+             class="product-img" />
+      </div>
+
+      <div class="product-info">
+        <span class="product-name">
+          {{ p.nombre }}
+        </span>
+
+        <span class="product-desc">
+          {{ p.descripcion }}
+        </span>
+
+        <span class="product-price">
+          S/ {{ p.precio | number:'1.2-2'}}
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 <div class="bottom-menu">
 
   <div class="menu-item"
@@ -164,12 +248,23 @@
     <span>Inicio</span>
   </div>
 
-  <div class="menu-item"
-       [class.active]="activeTab === 'cupones'"
-       (click)="setTab('cupones')">
-    <ion-icon [name]="activeTab === 'cupones' ? 'pricetag' : 'pricetag-outline'"></ion-icon>
-    <span>Cupones</span>
+  <div class="menu-item cart-item"
+     [class.active]="activeTab === 'carrito'"
+     (click)="setTab('carrito')">
+
+  <div class="cart-icon-wrapper">
+
+    <ion-icon name="cart-outline"></ion-icon>
+
+    <div class="cart-badge" *ngIf="cantidadTotal > 0">
+  {{ cantidadTotal }}
+</div>
+
   </div>
+
+  <span>Carrito</span>
+
+</div>
 
   <div class="menu-item"
        [class.active]="activeTab === 'pedidos'"

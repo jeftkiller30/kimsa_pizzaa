@@ -1,0 +1,86 @@
+<ion-content [fullscreen]="true" class="pago-page">
+
+  <div class="header">
+
+    <button class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+
+    <h1>Método de pago</h1>
+
+  </div>
+
+  <div class="content">
+
+    <div class="summary-card">
+
+      <h2>Resumen del pedido</h2>
+
+      <div>
+        <span>Subtotal</span>
+        <strong>S/ {{ subtotal | number:'1.2-2' }}</strong>
+      </div>
+
+      <div>
+        <span>Envío</span>
+        <strong>S/ {{ delivery | number:'1.2-2' }}</strong>
+      </div>
+
+      <hr>
+
+      <div class="total-row">
+        <span>Total a pagar</span>
+        <strong>S/ {{ total | number:'1.2-2' }}</strong>
+      </div>
+
+    </div>
+
+    <h3 class="section-title">
+      Selecciona tu método de pago
+    </h3>
+
+    <div
+  class="payment-card"
+  *ngFor="let metodo of metodos"
+  [class.active]="metodoSeleccionado === metodo.nombre"
+  [ngClass]="{
+    'yape-card': metodo.nombre === 'Yape',
+    'plin-card': metodo.nombre === 'Plin',
+    'tarjeta-card': metodo.nombre === 'Tarjeta de crédito / débito',
+    'efectivo-card': metodo.nombre === 'Efectivo'
+  }"
+  (click)="seleccionarMetodo(metodo.nombre)"
+>
+
+      <img [src]="metodo.icono" />
+
+      <div class="payment-info">
+        <h4>{{ metodo.nombre }}</h4>
+        <p>{{ metodo.descripcion }}</p>
+      </div>
+
+      <div class="radio">
+        <span *ngIf="metodoSeleccionado === metodo.nombre"></span>
+      </div>
+
+    </div>
+
+    <div class="secure-card">
+
+      <ion-icon name="shield-checkmark-outline"></ion-icon>
+
+      <div>
+        <h4>Tus pagos están 100% protegidos</h4>
+        <p>Usamos cifrado SSL y no almacenamos tus datos.</p>
+      </div>
+
+    </div>
+
+    <button class="continue-btn" (click)="continuar()">
+      Continuar
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </button>
+
+  </div>
+
+</ion-content>

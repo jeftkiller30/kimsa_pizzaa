@@ -49,30 +49,7 @@ export class CuentaPage implements OnInit {
   async loginGoogle() {
     try {
       const result = await this.authService.loginGoogle();
-      const user = result.user;
-
-      const info = getAdditionalUserInfo(result);
-      const esNuevoUsuario = info?.isNewUser === true;
-
-      if (user?.email) {
-        localStorage.setItem('emailUsuario', user.email);
-      }
-
-      if (esNuevoUsuario) {
-        localStorage.removeItem('nombreUsuario');
-        localStorage.removeItem('fechaNacimiento');
-        localStorage.removeItem(`onboarding_${user.uid}`);
-
-        this.router.navigate(['/nombre-usuario']);
-        return;
-      }
-
-      if (user?.displayName) {
-        localStorage.setItem('nombreUsuario', user.displayName);
-      }
-
-      this.router.navigate(['/home']);
-
+      this.validarFlujoUsuario(result);
     } catch (error) {
       console.log(error);
       alert('No se pudo iniciar sesión con Google');
@@ -81,12 +58,67 @@ export class CuentaPage implements OnInit {
 
   async loginFacebook() {
     try {
-      await this.authService.loginFacebook();
-      this.router.navigate(['/home']);
+      const result = await this.authService.loginFacebook();
+      this.validarFlujoUsuario(result);
     } catch (error) {
       console.log(error);
       alert('No se pudo iniciar sesión con Facebook');
     }
+  }
+
+  private validarFlujoUsuario(result: any) {
+    const user = result.user;
+
+    if (!user) {
+      return;
+    }
+
+    const info = getAdditionalUserInfo(result);
+    const esNuevoUsuario = info?.isNewUser === true;
+
+    if (user.email) {
+      localStorage.setItem('emailUsuario', user.email);
+    }
+
+    const nombreKey = `nombre_${user.uid}`;
+    const fechaKey = `fecha_${user.uid}`;
+    const onboardingKey = `onboarding_${user.uid}`;
+
+    const nombreGuardado = localStorage.getItem(nombreKey);
+    const fechaGuardada = localStorage.getItem(fechaKey);
+    const onboardingCompleto =
+      localStorage.getItem(onboardingKey) === 'true';
+
+    if (
+      !esNuevoUsuario &&
+      onboardingCompleto &&
+      nombreGuardado &&
+      fechaGuardada
+    ) {
+      this.router.navigate(['/home']);
+      return;
+    }
+
+    if (esNuevoUsuario) {
+      localStorage.removeItem(nombreKey);
+      localStorage.removeItem(fechaKey);
+      localStorage.removeItem(onboardingKey);
+      this.router.navigate(['/nombre-usuario']);
+      return;
+    }
+
+    if (!nombreGuardado) {
+      this.router.navigate(['/nombre-usuario']);
+      return;
+    }
+
+    if (!fechaGuardada) {
+      this.router.navigate(['/fecha-nacimiento']);
+      return;
+    }
+
+    localStorage.setItem(onboardingKey, 'true');
+    this.router.navigate(['/home']);
   }
 
   async loginEmail(email: string, password: string) {

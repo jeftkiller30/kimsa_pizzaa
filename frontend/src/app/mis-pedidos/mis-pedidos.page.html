@@ -1,0 +1,250 @@
+<ion-content [fullscreen]="true" class="pedidos-page">
+
+  <div class="header">
+    <div></div>
+    <div>
+      <h1>Mis pedidos</h1>
+    </div>
+    <div></div>
+  </div>
+
+  <div class="tabs" *ngIf="!cargando && pedidos.length > 0">
+    <button
+      *ngFor="let filtro of filtros"
+      [class.active]="filtroActivo === filtro.value"
+      (click)="cambiarFiltro(filtro.value)">
+      <span class="tab-label">
+  {{ filtro.label }}
+</span>
+    </button>
+  </div>
+
+  <div class="stats-card" *ngIf="!cargando && pedidos.length > 0">
+    <div>
+      <ion-icon name="bag-handle-outline"></ion-icon>
+      <strong>{{ totalPedidos }}</strong>
+      <span>Total</span>
+    </div>
+
+    <div>
+      <ion-icon name="time-outline"></ion-icon>
+      <strong>{{ pendientes }}</strong>
+      <span>Pendientes</span>
+    </div>
+
+    <div>
+      <ion-icon name="bicycle-outline"></ion-icon>
+      <strong>{{ enCamino }}</strong>
+      <span>En camino</span>
+    </div>
+
+    <div>
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <strong>{{ entregados }}</strong>
+      <span>Entregados</span>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="cargando">
+    Cargando pedidos...
+  </div>
+
+  <div class="empty-box" *ngIf="!cargando && pedidos.length === 0">
+    <img
+      src="assets/iconos/pedido.png"
+      class="empty-img"
+      alt="Pedido vacío"
+    />
+
+    <h2>Aún no tienes pedidos 🍕</h2>
+
+    <p>Parece que todavía no has realizado ningún pedido.</p>
+
+    <button class="order-btn" (click)="hacerPrimerPedido()">
+      Hacer mi primer pedido
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+    </button>
+  </div>
+
+  <div
+    class="empty-filter"
+    *ngIf="!cargando && pedidos.length > 0 && pedidosFiltrados.length === 0">
+    No hay pedidos con este filtro.
+  </div>
+
+  <div class="orders-list" *ngIf="!cargando && pedidosFiltrados.length > 0">
+
+    <div class="order-card" *ngFor="let pedido of pedidosFiltrados">
+
+      <div class="order-top">
+        <div class="order-title">
+          <div class="order-icon">
+            <ion-icon name="bag-handle-outline"></ion-icon>
+          </div>
+
+          <div>
+            <h2>Pedido #{{ pedido.id.slice(-5).toUpperCase() }}</h2>
+            <p>{{ pedido.fechaTexto }}</p>
+          </div>
+        </div>
+
+        <div class="status-badge" [ngClass]="pedido.estadoClase">
+          {{ pedido.estadoTexto }}
+        </div>
+      </div>
+
+      <div class="order-body">
+        <div class="product-images">
+          <img
+  *ngFor="let producto of primerasImagenes(pedido)"
+  [src]="obtenerImagenProducto(producto)"
+  [class.full-image]="esBebidaOCerveza(producto)"
+  alt="Producto"
+/>
+
+          <div class="extra" *ngIf="productosExtra(pedido) > 0">
+            +{{ productosExtra(pedido) }}
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <span>{{ pedido.productos?.length || 0 }} productos</span>
+          <small>Total</small>
+          <strong>S/ {{ pedido.total | number:'1.2-2' }}</strong>
+        </div>
+      </div>
+
+      <div class="info-strip">
+        <div>
+          <ion-icon name="location-outline"></ion-icon>
+          <span>
+            Dirección de entrega
+            <b>{{ pedido.direccion || 'Dirección pendiente' }}</b>
+          </span>
+        </div>
+
+        <div>
+          <ion-icon name="wallet-outline"></ion-icon>
+          <span>
+            Método de pago
+            <b>{{ pedido.metodoPago || 'Yape' }}</b>
+          </span>
+        </div>
+      </div>
+
+      <button class="detail-btn" (click)="abrirDetalle(pedido)">
+        Ver detalles
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </button>
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<div class="bottom-menu">
+  <div
+    class="menu-item"
+    [class.active]="activeTab === 'home'"
+    (click)="setTab('home')">
+    <ion-icon [name]="activeTab === 'home' ? 'home' : 'home-outline'"></ion-icon>
+    <span>Inicio</span>
+  </div>
+
+  <div
+    class="menu-item cart-item"
+    [class.active]="activeTab === 'carrito'"
+    (click)="setTab('carrito')">
+    <div class="cart-icon-wrapper">
+      <ion-icon name="cart-outline"></ion-icon>
+
+      <div class="cart-badge" *ngIf="cantidadTotal > 0">
+        {{ cantidadTotal }}
+      </div>
+    </div>
+
+    <span>Carrito</span>
+  </div>
+
+  <div
+    class="menu-item"
+    [class.active]="activeTab === 'pedidos'"
+    (click)="setTab('pedidos')">
+    <ion-icon [name]="activeTab === 'pedidos' ? 'receipt' : 'receipt-outline'"></ion-icon>
+    <span>Mis pedidos</span>
+  </div>
+
+  <div
+    class="menu-item"
+    [class.active]="activeTab === 'cuenta'"
+    (click)="setTab('cuenta')">
+    <ion-icon [name]="activeTab === 'cuenta' ? 'person' : 'person-outline'"></ion-icon>
+    <span>Mi cuenta</span>
+  </div>
+</div>
+
+<div class="detail-overlay" *ngIf="pedidoSeleccionado">
+  <div class="detail-bg" (click)="cerrarDetalle()"></div>
+
+  <div class="detail-sheet">
+    <div class="detail-header">
+      <div>
+        <h2>Pedido #{{ pedidoSeleccionado.id.slice(-5).toUpperCase() }}</h2>
+        <p>{{ pedidoSeleccionado.fechaTexto }}</p>
+      </div>
+
+      <button (click)="cerrarDetalle()">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <div
+      class="status-badge modal-status"
+      [ngClass]="pedidoSeleccionado.estadoClase">
+      {{ pedidoSeleccionado.estadoTexto }}
+    </div>
+
+    <div class="detail-products">
+      <div
+        class="detail-product"
+        *ngFor="let producto of pedidoSeleccionado.productos">
+
+        <img
+  [src]="obtenerImagenProducto(producto)"
+  [class.full-image]="esBebidaOCerveza(producto)"
+  alt="Producto"
+/>
+
+        <div>
+          <h3>{{ producto.nombre }}</h3>
+          <p>{{ producto.descripcion || 'Producto del pedido' }}</p>
+          <small>Cantidad: {{ producto.cantidad }}</small>
+        </div>
+
+        <strong>
+          S/ {{ producto.precio * producto.cantidad | number:'1.2-2' }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="detail-total">
+      <div>
+        <span>Subtotal</span>
+        <strong>S/ {{ pedidoSeleccionado.subtotal | number:'1.2-2' }}</strong>
+      </div>
+
+      <div>
+        <span>Delivery</span>
+        <strong>S/ {{ pedidoSeleccionado.delivery | number:'1.2-2' }}</strong>
+      </div>
+
+      <hr />
+
+      <div class="final">
+        <span>Total</span>
+        <strong>S/ {{ pedidoSeleccionado.total | number:'1.2-2' }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

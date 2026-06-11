@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -22,7 +22,7 @@ import * as L from 'leaflet';
   templateUrl: './direcciones.page.html',
   styleUrls: ['./direcciones.page.scss']
 })
-export class DireccionesPage implements AfterViewInit {
+export class DireccionesPage {
 
   direccion: string = '';
   referencia: string = '';
@@ -47,12 +47,32 @@ export class DireccionesPage implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
+  ionViewDidEnter() {
     this.cargarDireccion();
 
-    setTimeout(() => {
-      this.iniciarMapa();
-    }, 300);
+    // Destruye instancia anterior si existe
+    if (this.map) {
+      this.map.remove();
+      (this.map as any) = null;
+    }
+
+    // Fuerza dimensiones del contenedor antes de que Leaflet lo lea
+    const contenedor = document.getElementById('map');
+    if (contenedor) {
+      contenedor.style.width  = '100%';
+      contenedor.style.height = '320px';
+      contenedor.style.display = 'block';
+    }
+
+    // Tiempo suficiente para que Ionic termine animación + repintado
+    setTimeout(() => this.iniciarMapa(), 600);
+  }
+
+  ionViewWillLeave() {
+    if (this.map) {
+      this.map.remove();
+      (this.map as any) = null;
+    }
   }
 
   iniciarMapa() {
@@ -61,17 +81,28 @@ export class DireccionesPage implements AfterViewInit {
 
     this.map = L.map('map', {
       center: [latInicial, lngInicial],
-      zoom: 18,
-      zoomControl: false
+      zoom: 16,
+      zoomControl: false,
+      fadeAnimation: false,
+      markerZoomAnimation: false
     });
 
     L.tileLayer(
-      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-      {
-        maxZoom: 19,
-        attribution: 'Tiles © Esri'
-      }
-    ).addTo(this.map);
+  'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+  {
+    maxZoom: 19,
+    subdomains: 'abcd',
+    attribution: '&copy; OpenStreetMap &copy; CARTO'
+  }
+).addTo(this.map);
+
+    // Triple aseguramiento con intervalos crecientes
+    setTimeout(() => this.map.invalidateSize(), 100);
+    setTimeout(() => this.map.invalidateSize(), 300);
+    setTimeout(() => {
+      this.map.invalidateSize();
+      this.map.setView([latInicial, lngInicial], 16, { animate: false });
+    }, 600);
 
     this.map.on('moveend', () => {
       const centro = this.map.getCenter();
@@ -84,16 +115,9 @@ export class DireccionesPage implements AfterViewInit {
       }
 
       this.direccionTimeout = setTimeout(() => {
-        this.actualizarDireccionDesdeCoords(
-          centro.lat,
-          centro.lng
-        );
+        this.actualizarDireccionDesdeCoords(centro.lat, centro.lng);
       }, 900);
     });
-
-    setTimeout(() => {
-      this.map.invalidateSize();
-    }, 500);
   }
 
   cargarDireccion() {
@@ -141,15 +165,9 @@ export class DireccionesPage implements AfterViewInit {
       this.latitud = primera.coords.latitude;
       this.longitud = primera.coords.longitude;
 
-      this.map.setView(
-        [this.latitud, this.longitud],
-        18
-      );
+      this.map.setView([this.latitud, this.longitud], 18);
 
-      await this.actualizarDireccionDesdeCoords(
-        this.latitud,
-        this.longitud
-      );
+      await this.actualizarDireccionDesdeCoords(this.latitud, this.longitud);
 
       this.cargandoUbicacion = false;
 
@@ -182,10 +200,7 @@ export class DireccionesPage implements AfterViewInit {
             this.latitud = position.coords.latitude;
             this.longitud = position.coords.longitude;
 
-            this.map.setView(
-              [this.latitud, this.longitud],
-              18
-            );
+            this.map.setView([this.latitud, this.longitud], 18);
 
             if (this.direccionTimeout) {
               clearTimeout(this.direccionTimeout);
@@ -284,11 +299,10 @@ export class DireccionesPage implements AfterViewInit {
     localStorage.setItem('latitudUsuario', String(this.latitud));
     localStorage.setItem('longitudUsuario', String(this.longitud));
 
-    this.router.navigate(['/mi-cuenta']);
+    window.history.back();
   }
 
   goBack() {
-    this.router.navigate(['/mi-cuenta']);
-  }
-
+  window.history.back();
+}
 }

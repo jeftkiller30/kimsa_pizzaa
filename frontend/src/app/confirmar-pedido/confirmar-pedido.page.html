@@ -1,0 +1,295 @@
+<ion-content [fullscreen]="true" class="confirm-page">
+
+  <div class="header">
+
+    <button class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+
+    <h1>Confirmar pedido</h1>
+
+  </div>
+
+  <div class="content">
+
+    <!-- DIRECCIÓN -->
+    <div class="info-card">
+
+      <div class="info-card-row">
+
+        <div class="icon-box">
+          <ion-icon name="location-outline"></ion-icon>
+        </div>
+
+        <div class="info-body">
+
+          <div class="info-title-row">
+
+            <h2>Dirección de entrega</h2>
+
+            <button
+  class="change-btn"
+  (click)="router.navigate(['/direcciones'])"
+>
+              Cambiar
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <p>{{ direccionUsuario }}</p>
+<small>{{ distritoUsuario }}</small>
+
+        </div>
+
+      </div>
+
+      <div class="time-box">
+
+        <ion-icon name="time-outline"></ion-icon>
+
+        <span>
+          Tiempo estimado:
+          <b>{{ tiempoEstimado }}</b>
+        </span>
+
+        
+
+      </div>
+
+    </div>
+
+    <!-- MÉTODO DE PAGO -->
+    <div class="info-card">
+
+      <div class="info-card-row">
+
+        <div class="icon-box">
+          <ion-icon name="wallet-outline"></ion-icon>
+        </div>
+
+        <div class="info-body">
+
+          <div class="info-title-row">
+
+            <h2>Método de pago</h2>
+
+            <button class="change-btn" (click)="router.navigate(['/metodo-pago'])">
+              Cambiar
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+
+          </div>
+
+          <p>{{ metodoPago }}</p>
+<small>{{ metodoDescripcion }}</small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="products-card">
+
+      <div class="products-header">
+
+        <div>
+
+          <ion-icon name="bag-handle-outline"></ion-icon>
+
+          <h2>
+            Productos ({{ carrito.length }})
+          </h2>
+
+        </div>
+
+        <button (click)="editarCarrito()">
+  Editar
+</button>
+
+      </div>
+
+      <div
+        class="product-row"
+        *ngFor="let item of carrito"
+      >
+
+        <img
+  [src]="item.imagen"
+  [class.drink-img]="
+    item.categoria === 'bebidas' ||
+    item.categoria === 'cervezas'
+  "
+/>
+
+        <div class="product-info">
+
+          <h3>{{ item.nombre }}</h3>
+
+          <p>{{ item.descripcion }}</p>
+
+          <small>
+            Cantidad: {{ item.cantidad }}
+          </small>
+
+        </div>
+
+        <strong>
+          S/
+          {{
+            item.precio * item.cantidad
+            | number:'1.2-2'
+          }}
+        </strong>
+
+      </div>
+
+    </div>
+
+    <!-- NOTA -->
+    <div
+      class="note-card"
+      *ngIf="notaPedido"
+    >
+
+      <ion-icon
+        name="document-text-outline"
+      ></ion-icon>
+
+      <div>
+
+        <h2>Nota para el pedido</h2>
+
+        <p>{{ notaPedido }}</p>
+
+      </div>
+
+      <button (click)="abrirNota()">
+
+        Cambiar
+
+        <ion-icon
+          name="chevron-forward-outline"
+        ></ion-icon>
+
+      </button>
+
+    </div>
+
+    <!-- RESUMEN -->
+    <div class="summary-card">
+
+      <div>
+
+        <span>Subtotal</span>
+
+        <strong>
+          S/ {{ subtotal | number:'1.2-2' }}
+        </strong>
+
+      </div>
+
+      <div>
+
+        <span>Delivery</span>
+
+        <strong>
+          S/ {{ delivery | number:'1.2-2' }}
+        </strong>
+
+      </div>
+
+      <hr>
+
+      <div class="total-row">
+
+        <span>Total a pagar</span>
+
+        <strong>
+          S/ {{ total | number:'1.2-2' }}
+        </strong>
+
+      </div>
+
+    </div>
+
+    <!-- BOTÓN -->
+    <button
+      class="confirm-btn"
+      (click)="confirmarPedido()"
+    >
+
+      Confirmar pedido
+
+      <ion-icon
+        name="chevron-forward-outline"
+      ></ion-icon>
+
+    </button>
+
+    <!-- SEGURO -->
+    <div class="secure">
+
+      <ion-icon
+        name="lock-closed-outline"
+      ></ion-icon>
+
+      Tu pedido está 100% seguro
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- MODAL NOTA -->
+<div
+  class="nota-overlay"
+  *ngIf="showNotaModal"
+>
+
+  <div
+    class="nota-bg"
+    (click)="cerrarNota()"
+  ></div>
+
+  <div class="nota-sheet">
+
+    <div class="nota-header">
+
+      <h2>Editar nota</h2>
+
+      <button (click)="cerrarNota()">
+
+        <ion-icon
+          name="close-outline"
+        ></ion-icon>
+
+      </button>
+
+    </div>
+
+    <textarea
+      [(ngModel)]="notaTemp"
+      maxlength="120"
+      placeholder="Ej: Sin cebolla, más salsa..."
+    ></textarea>
+
+    <div class="nota-count">
+      {{ notaTemp.length || 0 }}/120
+    </div>
+
+    <button
+      class="save-note-btn"
+      (click)="guardarNota()"
+    >
+
+      Guardar cambios
+
+    </button>
+
+  </div>
+
+</div>

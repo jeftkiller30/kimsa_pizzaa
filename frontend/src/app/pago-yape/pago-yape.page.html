@@ -1,0 +1,143 @@
+<ion-content [fullscreen]="true" class="yape-page">
+
+  <div class="header">
+    <button class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </button>
+  </div>
+
+  <div class="content">
+
+    <h1>
+      Confirma tu pago con
+      <span>Yape</span>
+    </h1>
+
+    <img
+      src="assets/iconos/yape.png"
+      class="yape-logo"
+      alt="Yape"
+    />
+
+    <p class="intro">
+      Ingresa a Yape y copia el código de aprobación
+      para terminar tu compra.
+    </p>
+
+    <label>Celular asociado a Yape</label>
+
+    <div class="phone-box">
+      <span>+51</span>
+
+      <input
+  type="text"
+  inputmode="numeric"
+  maxlength="9"
+  [value]="celular"
+  (keypress)="validarNumero($event)"
+  (input)="soloNumeros($event, 'celular')"
+  placeholder="Ingresa tu número de celular Yape"
+/>
+    </div>
+
+    <label>Código de aprobación de Yape</label>
+
+    <input
+  class="code-input"
+  type="text"
+  inputmode="numeric"
+  maxlength="6"
+  [value]="codigo"
+  (keypress)="validarNumero($event)"
+  (input)="soloNumeros($event, 'codigo')"
+  placeholder="Ingresa el código de aprobación"
+/>
+
+    <div class="help-row" (click)="abrirAyudaYape()">
+      <ion-icon name="help-circle-outline"></ion-icon>
+
+      <span>
+        ¿Dónde encuentro el código de aprobación?
+      </span>
+
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </div>
+
+    <div class="summary-card">
+
+      <h2>Resumen del pedido</h2>
+
+      <div>
+        <span>Productos</span>
+        <strong>S/ {{ subtotal | number:'1.2-2' }}</strong>
+      </div>
+
+      <div>
+        <span>Delivery</span>
+        <strong>S/ {{ delivery | number:'1.2-2' }}</strong>
+      </div>
+
+      <hr>
+
+      <div class="total-row">
+        <span>Total a pagar</span>
+        <strong>S/ {{ total | number:'1.2-2' }}</strong>
+      </div>
+
+    </div>
+
+    <div class="secure-card">
+
+      <ion-icon name="shield-checkmark-outline"></ion-icon>
+
+      <div>
+        <h3>Pago 100% seguro</h3>
+        <p>Tu información está protegida y tu pago es seguro.</p>
+      </div>
+
+    </div>
+
+    <button
+      class="complete-btn"
+      [class.active]="formularioValido"
+      [disabled]="!formularioValido"
+      (click)="completarCompra()">
+
+      {{ cargando ? 'Guardando pedido...' : 'Completar compra' }}
+
+    </button>
+
+  </div>
+
+  <div class="yape-help-overlay" *ngIf="mostrarAyudaYape">
+  <div class="yape-help-modal">
+
+    <button class="close-help" (click)="cerrarAyudaYape()">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>
+
+    <h2>¿Dónde encuentro el código de aprobación Yape?</h2>
+
+    <p class="help-title">Instrucciones de pago con Yape:</p>
+
+    <p><b>1. Ingresa</b> al app de Yape y entra a la opción <b>“Aprobar compras”</b></p>
+
+    <p><b>2. Toca el código</b> que aparece en pantalla para copiarlo</p>
+
+    <p><b>3. Regresa a Kimsa Pizza</b> e ingresa el código en el campo de aprobación</p>
+
+    <div class="help-images">
+  <img
+    src="assets/iconos/yape-ayuda.png"
+    alt="Ayuda Yape"
+  />
+</div>
+
+    <button class="understood-btn" (click)="cerrarAyudaYape()">
+      Entendido
+    </button>
+
+  </div>
+</div>
+
+</ion-content>

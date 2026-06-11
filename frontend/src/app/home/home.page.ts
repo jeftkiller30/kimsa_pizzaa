@@ -8,13 +8,16 @@ import { filter } from 'rxjs/operators';
 import { getAuth } from 'firebase/auth';
 
 import {
-  home, homeOutline,
-  pricetag, pricetagOutline,
-  receipt, receiptOutline,
-  person, personOutline,
+  home,
+  homeOutline,
+  receipt,
+  receiptOutline,
+  person,
+  personOutline,
   bicycleOutline,
   storefrontOutline,
-  lockClosedOutline
+  lockClosedOutline,
+  cartOutline
 } from 'ionicons/icons';
 
 @Component({
@@ -28,13 +31,20 @@ export class HomePage implements OnInit, OnDestroy {
 
   pizzas: any[] = [];
   bebidas: any[] = [];
+  alitas: any[] = [];
+  piqueos: any[] = [];
+
+  cantidadTotal = 0;
 
   private bannerInterval: any;
+
   activeBanner = 0;
+
   touchStartX = 0;
   touchEndX = 0;
 
   activeTab: string = 'home';
+
   tipoEntrega: string = 'delivery';
 
   showLoginModal: boolean = false;
@@ -47,30 +57,34 @@ export class HomePage implements OnInit, OnDestroy {
     addIcons({
       home,
       homeOutline,
-      pricetag,
-      pricetagOutline,
       receipt,
       receiptOutline,
       person,
       personOutline,
       bicycleOutline,
       storefrontOutline,
-      lockClosedOutline
+      lockClosedOutline,
+      cartOutline
     });
 
-    // 🔥 SINCRONIZAR TABS CON RUTAS
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
 
         const url = this.router.url;
 
-        // 🔥 HOME
         if (url.includes('home')) {
           this.activeTab = 'home';
         }
 
-        // 🔥 CUENTA
+        if (url.includes('carrito')) {
+          this.activeTab = 'carrito';
+        }
+
+        if (url.includes('mis-pedidos')) {
+          this.activeTab = 'pedidos';
+        }
+
         if (
           url.includes('cuenta') ||
           url.includes('mi-cuenta')
@@ -113,14 +127,38 @@ export class HomePage implements OnInit, OnDestroy {
         this.bebidas =
           data.filter(p => p.categoria === 'bebidas');
 
+          this.alitas =
+          data.filter(p => p.categoria === 'alitas');
+
+        this.piqueos =
+          data.filter(p => p.categoria === 'piqueos');
+
       });
 
     this.startInterval();
 
   }
 
+  ionViewWillEnter() {
+
+    const carrito =
+      JSON.parse(
+        localStorage.getItem('carrito') || '[]'
+      );
+
+    this.cantidadTotal =
+      carrito.reduce(
+        (total: number, item: any) =>
+          total + item.cantidad,
+        0
+      );
+
+  }
+
   ngOnDestroy() {
+
     clearInterval(this.bannerInterval);
+
   }
 
   startInterval() {
@@ -145,13 +183,17 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   onTouchStart(event: any) {
+
     this.touchStartX =
       event.changedTouches[0].screenX;
+
   }
 
   onTouchMove(event: any) {
+
     this.touchEndX =
       event.changedTouches[0].screenX;
+
   }
 
   onTouchEnd() {
@@ -191,7 +233,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   goToBanner(index: number) {
+
     this.activeBanner = index;
+
   }
 
   selectCategory(cat: any) {
@@ -218,11 +262,17 @@ export class HomePage implements OnInit, OnDestroy {
 
   openProduct(p: any) {
 
-    console.log('Producto:', p);
+    this.router.navigate(
+      ['/producto-detalle'],
+      {
+        state: {
+          producto: p
+        }
+      }
+    );
 
   }
 
-  // 🔥 MENÚ PRINCIPAL
   setTab(tab: string) {
 
     this.activeTab = tab;
@@ -241,17 +291,29 @@ export class HomePage implements OnInit, OnDestroy {
 
         break;
 
-      case 'cupones':
+      case 'carrito':
 
-        console.log('Cupones');
+        this.activeTab = 'carrito';
+
+        this.router.navigate(['/carrito']);
 
         break;
 
       case 'pedidos':
 
-        this.showLoginModal = true;
+        if (user) {
 
-        document.body.style.overflow = 'hidden';
+          this.activeTab = 'pedidos';
+
+          this.router.navigate(['/mis-pedidos']);
+
+        } else {
+
+          this.showLoginModal = true;
+
+          document.body.style.overflow = 'hidden';
+
+        }
 
         break;
 
@@ -277,7 +339,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   }
 
-  // 🔥 CERRAR MODAL
   closeModal() {
 
     this.showLoginModal = false;
@@ -286,7 +347,6 @@ export class HomePage implements OnInit, OnDestroy {
 
   }
 
-  // 🔥 LOGIN / REGISTRO
   goLogin() {
 
     this.showLoginModal = false;

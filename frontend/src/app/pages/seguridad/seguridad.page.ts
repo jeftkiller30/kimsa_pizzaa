@@ -15,7 +15,11 @@ import {
 import {
   getAuth,
   signOut,
-  deleteUser
+  deleteUser,
+  reauthenticateWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  User
 } from 'firebase/auth';
 
 @Component({
@@ -33,7 +37,6 @@ export class SeguridadPage {
     private router: Router,
     private alertCtrl: AlertController
   ) {
-
     addIcons({
       chevronBackOutline,
       chevronForwardOutline,
@@ -47,136 +50,128 @@ export class SeguridadPage {
     if (user?.email) {
       this.email = user.email;
     }
-
   }
 
   goBack() {
-
     this.router.navigate(['/mi-cuenta']);
-
   }
 
-  // 🔥 CERRAR SESIÓN
   async cerrarSesion() {
-
     const alertBox = await this.alertCtrl.create({
-
       header: 'Cerrar sesión',
-
-      message:
-        '¿Seguro que deseas salir de tu cuenta?',
-
+      message: '¿Seguro que deseas salir de tu cuenta?',
       buttons: [
-
         {
           text: 'Cancelar',
           role: 'cancel'
         },
-
         {
           text: 'Salir',
-
           handler: async () => {
-
             await signOut(getAuth());
 
-            // 🔥 NO BORRAR DATOS USUARIO
-            localStorage.removeItem(
-              'activeTab'
-            );
+            localStorage.removeItem('activeTab');
 
             this.router.navigate(['/cuenta']);
-
           }
         }
-
       ]
     });
 
     await alertBox.present();
-
   }
 
-  // 🔥 ELIMINAR CUENTA
   async eliminarCuenta() {
-
     const alertBox = await this.alertCtrl.create({
-
       header: 'Eliminar cuenta',
-
-      message:
-        'Esta acción eliminará tu cuenta permanentemente. ¿Deseas continuar?',
-
+      message: 'Esta acción eliminará tu cuenta permanentemente. ¿Deseas continuar?',
       buttons: [
-
         {
           text: 'Cancelar',
           role: 'cancel'
         },
-
         {
           text: 'Eliminar',
           role: 'destructive',
-
           handler: async () => {
-
-            try {
-
-              const user =
-                getAuth().currentUser;
-
-              if (!user) {
-
-                this.router.navigate(['/cuenta']);
-
-                return;
-
-              }
-
-              // 🔥 ELIMINAR FIREBASE
-              await deleteUser(user);
-
-              // 🔥 AQUÍ SÍ BORRAR TODO
-              localStorage.clear();
-
-              // 🔥 VOLVER AUTH
-              this.router.navigate(['/cuenta']);
-
-            } catch (error: any) {
-
-              console.log(error);
-
-              if (
-                error.code ===
-                'auth/requires-recent-login'
-              ) {
-
-                window.alert(
-                  'Por seguridad, vuelve a iniciar sesión antes de eliminar tu cuenta.'
-                );
-
-                this.router.navigate(['/cuenta']);
-
-              } else {
-
-                window.alert(
-                  'No se pudo eliminar la cuenta.'
-                );
-
-              }
-
-            }
-
+            await this.eliminarCuentaDirecto();
           }
-
         }
-
       ]
-
     });
 
     await alertBox.present();
+  }
 
+  private async eliminarCuentaDirecto() {
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        this.router.navigate(['/cuenta']);
+        return;
+      }
+
+      const uid = user.uid;
+
+      try {
+        await deleteUser(user);
+      } catch (error: any) {
+        if (error.code === 'auth/requires-recent-login') {
+          await this.reautenticarUsuario(user);
+          await deleteUser(user);
+        } else {
+          throw error;
+        }
+      }
+
+      localStorage.removeItem(`nombre_${uid}`);
+      localStorage.removeItem(`fecha_${uid}`);
+      localStorage.removeItem(`telefono_${uid}`);
+      localStorage.removeItem(`onboarding_${uid}`);
+      localStorage.removeItem('emailUsuario');
+      localStorage.removeItem('activeTab');
+
+      this.router.navigate(['/cuenta']);
+
+    } catch (error: any) {
+      console.log(error);
+
+      if (error.code === 'auth/popup-closed-by-user') {
+        alert('Debes completar la verificación para eliminar la cuenta.');
+        return;
+      }
+
+      alert('No se pudo eliminar la cuenta.');
+    }
+  }
+
+  private async reautenticarUsuario(user: User) {
+    const providerId =
+      user.providerData[0]?.providerId;
+
+    if (providerId === 'google.com') {
+      const provider = new GoogleAuthProvider();
+
+      await reauthenticateWithPopup(
+        user,
+        provider
+      );
+
+      return;
+    }
+
+    if (providerId === 'facebook.com') {
+      const provider = new FacebookAuthProvider();
+
+      await reauthenticateWithPopup(
+        user,
+        provider
+      );
+
+      return;
+    }
   }
 
 }

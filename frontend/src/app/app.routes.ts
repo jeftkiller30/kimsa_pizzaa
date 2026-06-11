@@ -74,4 +74,32 @@ export const routes: Routes = [
     path: 'direcciones',
     loadComponent: () => import('./pages/direcciones/direcciones.page').then( m => m.DireccionesPage)
   },
+  {
+    path: 'mis-pedidos',
+    loadComponent: () => import('./mis-pedidos/mis-pedidos.page').then( m => m.MisPedidosPage)
+  },
+  {
+    path: 'producto-detalle',
+    loadComponent: () => import('./producto-detalle/producto-detalle.page').then( m => m.ProductoDetallePage)
+  },
+  {
+    path: 'carrito',
+    loadComponent: () => import('./carrito/carrito.page').then( m => m.CarritoPage)
+  },
+  {
+    path: 'confirmar-pedido',
+    loadComponent: () => import('./confirmar-pedido/confirmar-pedido.page').then( m => m.ConfirmarPedidoPage)
+  },
+  {
+    path: 'metodo-pago',
+    loadComponent: () => import('./metodo-pago/metodo-pago.page').then( m => m.MetodoPagoPage)
+  },
+  {
+    path: 'pago-yape',
+    loadComponent: () => import('./pago-yape/pago-yape.page').then( m => m.PagoYapePage)
+  },
+  {
+    path: 'tarjeta-pago',
+    loadComponent: () => import('./tarjeta-pago/tarjeta-pago.page').then( m => m.TarjetaPagoPage)
+  },
 ];

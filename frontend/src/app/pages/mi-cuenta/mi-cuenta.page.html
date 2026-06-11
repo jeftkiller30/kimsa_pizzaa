@@ -64,23 +64,13 @@
 
     </div>
 
-    <!-- PAGOS -->
-    <div class="menu-item">
 
-      <div class="icon-box">
-        <ion-icon name="card-outline"></ion-icon>
-      </div>
 
-      <div class="menu-text">
-        <h3>Métodos de pago</h3>
-        <p>Administra tarjetas y pagos</p>
-      </div>
 
-      <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
 
     </div>
 
-  </div>
+
 
   <!-- 🔥 BOTTOM MENU -->
   <div class="bottom-menu">
@@ -94,14 +84,23 @@
 
     </div>
 
-    <div class="menu-bottom-item"
-         [class.active]="activeTab === 'cupones'"
-         (click)="setTab('cupones')">
+    <div class="menu-bottom-item cart-item"
+     [class.active]="activeTab === 'carrito'"
+     (click)="setTab('carrito')">
 
-      <ion-icon [name]="activeTab === 'cupones' ? 'pricetag' : 'pricetag-outline'"></ion-icon>
-      <span>Cupones</span>
+  <div class="cart-icon-wrapper">
 
-    </div>
+    <ion-icon name="cart-outline"></ion-icon>
+
+    <div class="cart-badge" *ngIf="cantidadTotal > 0">
+  {{ cantidadTotal }}
+</div>
+
+  </div>
+
+  <span>Carrito</span>
+
+</div>
 
     <div class="menu-bottom-item"
          [class.active]="activeTab === 'pedidos'"

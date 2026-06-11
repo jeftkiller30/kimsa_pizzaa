@@ -1,0 +1,206 @@
+<ion-content [fullscreen]="true" class="carrito-page">
+
+  <div class="header">
+    <h1>
+      {{ carrito.length === 0 ? 'Carrito' : 'Mi Carrito' }}
+    </h1>
+  </div>
+
+  <!-- VACÍO -->
+  <div class="empty-content" *ngIf="carrito.length === 0">
+
+    <img
+      src="assets/iconos/carrito.png"
+      class="empty-img"
+      alt="Carrito vacío"
+    />
+
+    <h2>Tu carrito está vacío</h2>
+
+    <p>
+      Parece que aún no agregaste productos
+      a tu carrito.
+      <br>
+      ¡Explora nuestro menú y elige tus favoritos!
+    </p>
+
+    <button class="menu-btn" (click)="verMenu()">
+      <ion-icon name="restaurant-outline"></ion-icon>
+      VER MENÚ
+    </button>
+
+  </div>
+
+  <!-- CARRITO CON PRODUCTOS -->
+  <div class="cart-content" *ngIf="carrito.length > 0">
+
+    <div class="cart-card" *ngFor="let item of carrito">
+
+      <img
+  [src]="item.imagen"
+  class="cart-img"
+  [class.drink-cart-img]="
+    item.categoria === 'bebidas' ||
+    item.categoria === 'cervezas'
+  "
+/>
+
+      <div class="cart-info-product">
+        <h3>{{ item.nombre }}</h3>
+        <p>{{ item.descripcion }}</p>
+
+        <button class="remove-btn" (click)="quitar(item)">
+          Quitar
+        </button>
+      </div>
+
+      <div class="cart-side">
+        <strong>
+          S/ {{ item.precio * item.cantidad | number:'1.2-2' }}
+        </strong>
+
+        <div class="qty-box">
+          <button (click)="disminuir(item)">
+            <ion-icon name="remove-outline"></ion-icon>
+          </button>
+
+          <span>{{ item.cantidad }}</span>
+
+          <button (click)="aumentar(item)">
+            <ion-icon name="add-outline"></ion-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NOTA -->
+    <div class="option-card" (click)="abrirNota()">
+      <div class="option-left">
+        <ion-icon name="document-text-outline"></ion-icon>
+
+        <div>
+          <span>
+            {{ notaPedido ? 'Nota del pedido' : 'Agregar nota para el pedido' }}
+          </span>
+
+          <small *ngIf="notaPedido">
+            {{ notaPedido }}
+          </small>
+        </div>
+      </div>
+
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </div>
+
+    <div class="summary-card">
+
+      <div>
+        <span>Subtotal</span>
+        <strong>S/ {{ subtotal | number:'1.2-2' }}</strong>
+      </div>
+
+      <div class="total-row">
+        <span>Total a pagar</span>
+        <strong>S/ {{ total | number:'1.2-2' }}</strong>
+      </div>
+
+    </div>
+
+    <button class="pay-btn" (click)="router.navigate(['/confirmar-pedido'])">
+      Continuar con el pago
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </button>
+
+  </div>
+
+</ion-content>
+
+<!-- BOTTOM MENU -->
+<div class="bottom-menu">
+
+  <div class="menu-item" (click)="router.navigate(['/home'])">
+    <ion-icon name="home-outline"></ion-icon>
+    <span>Inicio</span>
+  </div>
+
+  <div class="menu-item active">
+
+    <div class="cart-icon-wrapper">
+      <ion-icon name="cart"></ion-icon>
+
+      <div
+  class="cart-badge"
+  *ngIf="cantidadTotal > 0">
+
+  {{ cantidadTotal }}
+
+</div>
+
+    </div>
+
+    <span>Carrito</span>
+
+  </div>
+
+  <div class="menu-item" (click)="router.navigate(['/mis-pedidos'])">
+    <ion-icon name="receipt-outline"></ion-icon>
+    <span>Mis pedidos</span>
+  </div>
+
+  <div class="menu-item" (click)="router.navigate(['/mi-cuenta'])">
+    <ion-icon name="person-outline"></ion-icon>
+    <span>Mi cuenta</span>
+  </div>
+
+</div>
+
+<!-- MODAL NOTA -->
+<div class="nota-overlay" *ngIf="showNotaModal">
+
+  <div class="nota-bg" (click)="cerrarNota()"></div>
+
+  <div class="nota-sheet">
+
+    <div class="nota-header">
+      <h2>Agregar nota</h2>
+
+      <button (click)="cerrarNota()">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <p>
+      Escribe alguna indicación especial para tu pedido.
+    </p>
+
+    <textarea
+      [(ngModel)]="notaTemp"
+      maxlength="120"
+      placeholder="Ej: Sin cebolla, más salsa, entregar en puerta..."
+    ></textarea>
+
+    <div class="nota-count">
+      {{ notaTemp.length || 0 }}/120
+    </div>
+
+    <div class="nota-actions">
+
+      <button
+        class="delete-note"
+        *ngIf="notaPedido"
+        (click)="eliminarNota()">
+        Eliminar
+      </button>
+
+      <button
+        class="save-note"
+        (click)="guardarNota()">
+        Guardar nota
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
